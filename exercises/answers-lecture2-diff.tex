@@ -250,7 +250,7 @@ Dimensions are
     \item $f(z) = \exp(-\frac{1}{2}z), \quad z = g(\textbf{y}) =  \textbf{y}^TS^{-1}\textbf{y}, \quad \textbf{y} = h(\textbf{x}) = \textbf{x} - \bm{\mu}, \quad \textbf{x},\bm{\mu}\in\mathbb{R}^D, S\in\mathbb{R}^{D\times D}$
     
 \begin{align*}
-\frac{\partial f}{\partial \textbf{x}} &= \frac{\partial f}{\partial z} \frac{\partial z}{\partial \textbf{y}}\frac{\partial \textbf{y}}{\partial \textbf{x}} = \frac{\partial \exp(-\frac{1}{2}z)}{\partial z} \frac{\partial (\textbf{y}^TS^{-1}\textbf{y})}{\partial \textbf{y}}\frac{\partial (\textbf{x} - \bm{\mu})}{\partial \textbf{x}} = \exp\left(-\frac{1}{2}z\right)\left(-\frac{1}{2}\right)\textbf{y}^T(S^T + S^{-T})I \\
+\frac{\partial f}{\partial \textbf{x}} &= \frac{\partial f}{\partial z} \frac{\partial z}{\partial \textbf{y}}\frac{\partial \textbf{y}}{\partial \textbf{x}} = \frac{\partial \exp(-\frac{1}{2}z)}{\partial z} \frac{\partial (\textbf{y}^TS^{-1}\textbf{y})}{\partial \textbf{y}}\frac{\partial (\textbf{x} - \bm{\mu})}{\partial \textbf{x}} = \exp\left(-\frac{1}{2}z\right)\left(-\frac{1}{2}\right)\textbf{y}^T(S^{-1} + S^{-T})I \\
 &=-\frac{1}{2}\exp\left(-\frac{1}{2}\Big((\textbf{x} - \bm{\mu})^TS^{-1}(\textbf{x} - \bm{\mu})\Big)\right)(\textbf{x} - \bm{\mu})^T(S^{-1} + S^{-T})
 \end{align*}
 where $S^{-T} = \left(S^{-1}\right)^T$, and we use (5.107) to calculate $\frac{\partial (\textbf{y}^TS^{-1}\textbf{y})}{\partial \textbf{y}}$.
