@@ -446,14 +446,14 @@ f &: \Reals^{N\times N}\times\Reals^{N\times N} &&\to \Reals
  \edge {Kinv} {v3};
  \edge {v3} {out};
 }
-\caption{Computational graph for \questionref{q:autodiff}, where we define $v_1 = \mat K_1 + \mat K_2$, $v_2 = v_1\inv$, and $v_3 = \vy\transpose v_1 \vy$.}
+\caption{Computational graph for \questionref{q:autodiff}, where we define $v_1 = \mat K_1 + \mat K_2$, $v_2 = v_1\inv$, and $v_3 = \vy\transpose v_2 \vy$.}
 \label{fig:qautodiff}
 \end{figure}
 
 \paragraph{Part c)} Let's first consider \textbf{forward mode}. For the derivatives w.r.t.~$\mat X$, we initialise as:
 \begin{align}
 &\text{Primal} && \text{Forward tangent} && \text{Notes} \nonumber \\
-v_{-1} &= \boldsymbol \ell && \dot v_{-1,iab} = \pderiv[{[v_{-1}]}_{i}]{X_{ab}} = 0 && v_{-1} \in \Reals^{2 \times (N\times 2)}\,, O(N) \\ % \pderiv[v_{-1}]{\boldsymbol\ell} = \mat I_2
+v_{-1} &= \boldsymbol \ell && \dot v_{-1,iab} = \pderiv[{[v_{-1}]}_{i}]{X_{ab}} = 0 && \dot v_{-1} \in \Reals^{2 \times (N\times 2)}\,, O(N) \\ % \pderiv[v_{-1}]{\boldsymbol\ell} = \mat I_2
 v_0 &= X && \dot v_0 = \pderiv[{[v_0]}_{ij}]{X_{ab}} = \delta_{ia}\delta_{jb}  &&  \dot v_0 \in \Reals^{(N\times 2)\times (N\times 2)}\,, O(N^2)
 \end{align}
 While for the derivatives w.r.t.~$\boldsymbol \ell$, we initialise as:
@@ -477,7 +477,7 @@ K_z &= \exp(\Lambda_z) && \pderiv[K_{znm}]{\Lambda_{zij}} = \exp(\Lambda_{zij})\
 & && \dot K_{znmab} = \exp(\Lambda_{znm})\dot\Lambda_{znmab} && \text{Structure allows } O(N^3)\,. \\
 v_1 &= \mat K_1 + \mat K_2 && \pderiv[v_{1ij}]{K_{znm}} = \delta_{in}\delta_{jm} && \\
 & && \dot v_1 = \pderiv[v_1]{\mat K_1} \dot{\mat K}_1 + \pderiv[v_1]{\mat K_2} \dot{\mat K}_2 && \\
-& && \dot v_{1,ijab} =  \dot K_{1,ijab} + \dot K_{z,ijab} && \\
+& && \dot v_{1,ijab} =  \dot K_{1,ijab} + \dot K_{2,ijab} && \\
 v_2&= v_1\inv && \pderiv[v_2]{v_1} = -v_1\inv \pderiv[v_1]{v_1}v_1\inv && \text{This is an identity.} \\
 & && \pderiv[v_{2,nm}]{v_{1,ij}} = \sum_{pq}-v_{1,np}\inv \delta_{pi}\delta_{qj} v_{1,qm}\inv && A_{pq}\inv = [A\inv]_{pq} \\
 & && \dot v_{2,nmab} = \sum_{pqij} -v_{1,np}\inv \delta_{pi}\delta_{qj} v_{1,qm}\inv \dot v_{1,ijab} && \\
